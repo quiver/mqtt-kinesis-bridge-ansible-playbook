@@ -1,0 +1,5 @@
+[
+  { "ParameterKey" : "KeyName", "ParameterValue" : "your_ssh_key_name" },
+  { "ParameterKey" : "InstanceType", "ParameterValue" : "t2.micro" },
+  { "ParameterKey" : "SSHLocation", "ParameterValue" : "0.0.0.0/0" }
+]

@@ -159,6 +159,31 @@ Response data is base64 encoded, so verify that the data is same as the one we j
 Perfect!
 
 
+Cloudformation for EC2 and Kinesis
+========================================================================================
+
+
+I created a cloudformation template to provision
+
+* Kinesis Stream(1 shard)
+* EC2 instance(w/ EIP and IAM role for kinesis:* action)
+
+There are three parameters for this stack:
+
+* KeyName : SSH key name for EC2
+* InstanceType : EC2 InstanceType. Defaults to `t2.micro`.
+* SSHLocation : SSH inbound IP range Defaults to `0.0.0.0/0`.
+
+After editting `cloudformation/parameters.json`, run the next command:
+
+        $ aws cloudformation create-stack \
+          --stack-name mqtt2kinesis \
+          --template-body file://cloudformation/kinesis-data-vis-sample-app.template.json \
+          --parameters file://cloudformation/parameters.json \
+          --capabilities=CAPABILITY_IAM
+
+This cloudformation template is heavily based on "Tutorial: Visualizing Web Traffic Using Amazon Kinesis" http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-sample-application.html .
+
 Notice
 ----------------------------------------------------------------------------------------
 
