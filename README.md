@@ -67,6 +67,7 @@ Launch Kinesis Stream
 
 Lanuch Amazon Kinesis stream and wait till the StreamStatus becomes ACTIVE.
 
+        $ aws kinesis create-stream --stream-name Foo --shard-count 1
         $ aws kinesis describe-stream --stream-name Foo
         {
             "StreamDescription": {
@@ -84,7 +85,7 @@ Integrate MQTT and Amazon Kinesis
 Run mqtt-Kinesis bridge and subscribe to `censors/+` topics:
 
         $ export STREAM=Foo
-        $ cd /home/ec2-user/mqtt-kinesis-bridge
+        $ cd ~/mqtt-kinesis-bridge
         $ python bridge.py $STREAM --region ap-northeast-1 --topic_name censors/+
         {
           "StreamDescription": {
@@ -92,23 +93,13 @@ Run mqtt-Kinesis bridge and subscribe to `censors/+` topics:
             "Shards": [
               {
                 "HashKeyRange": {
-                  "EndingHashKey": "10",
-                  "StartingHashKey": "0"
-                },
-                "SequenceNumberRange": {
-                  "StartingSequenceNumber": "20"
-                },
-                "ShardId": "shardId-000000000000"
-              },
-              {
-                "HashKeyRange": {
                   "EndingHashKey": "34",
-                  "StartingHashKey": "17"
+                  "StartingHashKey": "0"
                 },
                 "SequenceNumberRange": {
                   "StartingSequenceNumber": "49"
                 },
-                "ShardId": "shardId-000000000001"
+                "ShardId": "shardId-000000000000"
               }
             ],
             "StreamARN": "arn:aws:kinesis:ap-northeast-1:000000000000:stream/Foo",
@@ -118,6 +109,8 @@ Run mqtt-Kinesis bridge and subscribe to `censors/+` topics:
         }
         Starting MQTT-to-Kinesis bridge
         Bridge Connected, looping...
+        1439640509: New connection from 127.0.0.1 on port 1883.
+        1439640509: New client connected from 127.0.0.1 as paho/4DF21AE636529C7E2F (c1, k60).
         Connection Msg:
         Subscribe topic: censors/+ RC: (0, 1)
 
@@ -139,13 +132,13 @@ Retrieve records from Amazon Kinesis using `seqNum`
 
         $ aws kinesis get-shard-iterator \
           --stream-name Foo \
-          --shard-id shardId-000000000001 \
+          --shard-id shardId-000000000000 \
           --shard-iterator-type AT_SEQUENCE_NUMBER \
           --starting-sequence-number 49553524959787167203100577550735447012172782095451553810
         {
-            "ShardIterator": "LONG_ITERATOR_ID"
+            "ShardIterator": "012345"
         }
-        $ aws kinesis get-records --shard-iterator "LONG_ITERATOR_ID"
+        $ aws kinesis get-records --shard-iterator 012345
         {
             "Records": [
                 {
