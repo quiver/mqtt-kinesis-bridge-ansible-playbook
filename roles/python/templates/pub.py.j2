@@ -1,0 +1,3 @@
+# mqtt publisher
+import paho.mqtt.publish as publish
+publish.single(topic="{{ mqtt_topic }}", payload="28.5", hostname="localhost", port=1883)

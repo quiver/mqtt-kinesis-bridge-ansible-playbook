@@ -1,0 +1,7 @@
+---
+- pip: name=boto version=2.38.0
+
+- name: git clone mqtt-kinesis-bridge
+  git: repo=https://github.com/awslabs/mqtt-kinesis-bridge.git
+       dest=~/mqtt-kinesis-bridge
+  sudo: no

@@ -1,0 +1,12 @@
+---
+# This playbook contains common plays that will be run on all nodes.
+
+- name: upgrade all packages
+  yum: name=* state=latest
+
+- name: Install basic packages
+  yum: name={{ item }} state=present
+  with_items:
+    - telnet
+    - git
+    - jq

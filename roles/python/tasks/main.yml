@@ -1,0 +1,9 @@
+---
+- pip: name=paho-mqtt version=1.1
+
+- name: paho-pub/sub
+  template: src={{ item }}.j2  dest=~/{{ item }}
+  sudo: no
+  with_items:
+  - pub.py
+  - sub.py

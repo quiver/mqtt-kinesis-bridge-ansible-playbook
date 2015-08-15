@@ -1,0 +1,15 @@
+---
+# This playbook will install mosquitto
+
+- name: Copy the EPEL repository definition
+  copy: src=mosquitto.repo dest=/etc/yum.repos.d/mosquitto.repo
+
+- name: Install libselinux-python
+  yum: name={{ item }} state=present disable_gpg_check=yes
+  with_items:
+    - mosquitto-clients
+    - mosquitto
+
+- name: Start Mysql Service
+  service: name=mosquitto state=started enabled=yes
+

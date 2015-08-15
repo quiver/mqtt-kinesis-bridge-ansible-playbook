@@ -1,0 +1,34 @@
+---
+# This playbook deploys the whole application stack in this site.  
+
+- name: apply common configuration to all nodes
+  hosts: all
+  remote_user: ec2-user
+  sudo: yes
+
+  roles:
+    - common
+
+- name: install mqtt mosquitto
+  hosts: all
+  remote_user: ec2-user
+  sudo: yes
+
+  roles:
+    - mosquitto
+
+- name: install paho-mqtt
+  hosts: all
+  remote_user: ec2-user
+  sudo: yes
+
+  roles:
+    - python
+
+- name: install mqtt-kinesis bridge
+  hosts: all
+  remote_user: ec2-user
+  sudo: yes
+
+  roles:
+    - kinesis

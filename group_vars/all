@@ -1,0 +1,6 @@
+---
+# Variables listed here are applicable to all host groups
+
+mqtt_host: localhost
+mqtt_port: 1883
+mqtt_topic: censors/temperature
