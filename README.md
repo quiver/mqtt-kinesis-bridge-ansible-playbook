@@ -1,5 +1,5 @@
 Deploying MQTT mosquitto, paho-mqtt and MQTT-Amazon Kinesis bridge with Ansible Playbook
-----------------------------------------------------------------------------------------
+========================================================================================
 
 This playbooks is intended to ease installation of awslabs/mqtt-kinesis-bridge.
 
@@ -10,11 +10,11 @@ This playbook deploys
 - MQTT-Kinesis bridge https://github.com/awslabs/mqtt-kinesis-bridge
 
 Getting Started
-----------------------------------------------------------------------------------------
+========================================================================================
 
 
 Launch EC2 instance
-========================================================================================
+----------------------------------------------------------------------------------------
 
 Launch EC2 instance and once InstanceState becomes running, edit hosts.ini's IP address and 
 run the playbook with the following command ::
@@ -25,7 +25,7 @@ run the playbook with the following command ::
         $ ansible-playbook -i hosts.ini site.yml
 
 Play with MQTT/mosquitto
-========================================================================================
+----------------------------------------------------------------------------------------
 
 Log in to provisioned EC2 instance and make sure that MQTT/mosquitto is working
 
@@ -63,7 +63,7 @@ If MQTT works correctly, you should see message in `pub_term` terminal
 
 
 Launch Kinesis Stream
-========================================================================================
+----------------------------------------------------------------------------------------
 
 Lanuch Amazon Kinesis stream and wait till the StreamStatus becomes ACTIVE.
 
@@ -80,7 +80,7 @@ Lanuch Amazon Kinesis stream and wait till the StreamStatus becomes ACTIVE.
 
 
 Integrate MQTT and Amazon Kinesis
-========================================================================================
+----------------------------------------------------------------------------------------
 
 Run mqtt-Kinesis bridge and subscribe to `censors/+` topics:
 
@@ -160,7 +160,7 @@ Perfect!
 
 
 Cloudformation for EC2 and Kinesis
-========================================================================================
+----------------------------------------------------------------------------------------
 
 
 I created a cloudformation template to provision
@@ -185,7 +185,7 @@ After editting `cloudformation/parameters.json`, run the next command:
 This cloudformation template is heavily based on "Tutorial: Visualizing Web Traffic Using Amazon Kinesis" http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-sample-application.html .
 
 Notice
-----------------------------------------------------------------------------------------
+========================================================================================
 
 This playbook is tested with
 
